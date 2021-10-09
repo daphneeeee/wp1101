@@ -9,13 +9,22 @@
   </head>
   <body>
     <div class="sidebar">
-      <h4 class="selectedAlbum" id="album1" onclick="selectAlbum(1)">
+      <button id="add-album" onclick="addAlbum()">Add Album</button>
+      <button class="selectedAlbum" id="album1" onclick="selectAlbum(1)">
         Album 1
-      </h4>
-      <h4 id="album2" onclick="selectAlbum(2)">Album 2</h4>
-      <h4 id="album3" onclick="selectAlbum(3)">Album 3</h4>
+      </button>
+      <button id="album2" onclick="selectAlbum(2)">Album 2</button>
+      <button id="album3" onclick="selectAlbum(3)">Album 3</button>
     </div>
     <div class="display-area">
+      <div>
+        <img
+          id="delete-icon"
+          src="https://www.freeiconspng.com/thumbs/remove-icon-png/remove-icon-png-32.png"
+          onclick="deleteAlbum()"
+        />
+        <p id="delete-text">Delete album</p>
+      </div>
       <div class="display-area-top">
         <img
           class="icon-left"

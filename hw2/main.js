@@ -7,6 +7,7 @@ const images = [
 
 let currentIndex = 0;
 let album = 1;
+let albums = [1, 2, 3];
 
 let curImage = document.getElementById("photo"),
   prevButton = document.getElementById("prevBtn"),
@@ -44,7 +45,7 @@ function setSpecialEffect(newIndex) {
 }
 
 function selectAlbum(n) {
-  if (n === 3) {
+  if (n > 3) {
     alert("Sorry, empty album!");
   } else {
     prevAlbum = document.getElementById(`album${album}`);
@@ -53,5 +54,36 @@ function selectAlbum(n) {
     curAlbum.classList.add("selectedAlbum");
     album = n;
     setCurImage(0);
+  }
+}
+
+const parentAlbum = document.getElementsByClassName("sidebar");
+let num = 3;
+
+function addAlbum() {
+  num++;
+  albums.push(num);
+  const newElement = document.createElement("div");
+  const newAlbum = parentAlbum[0].appendChild(newElement);
+  newAlbum.innerHTML = `<button onclick="selectAlbum(${albums.length})">Album${albums.length}</button>`;
+}
+function deleteAlbum() {
+  const deleteChild = document.getElementById(`album${album}`);
+  parentAlbum[0].removeChild(deleteChild);
+  num--;
+  albums[album - 1] = 0;
+  album = getFirstAlbum() + 1;
+  console.log(album);
+  const curAlbum = document.getElementById(`album${album}`);
+  curAlbum.classList.add("selectedAlbum");
+  setCurImage(0);
+  if (albums[0] === 0 && albums[1] === 0 && albums[2] === 0) {
+  }
+}
+function getFirstAlbum() {
+  for (let i = 0; i < albums.length; i++) {
+    if (albums[i] !== 0) {
+      return i;
+    }
   }
 }
