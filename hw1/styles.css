@@ -48,12 +48,12 @@ h4 {
 }
 img.preview-pic {
   width: 10%;
-  height: auto;
+  height: 5%;
   margin: 3% 5%;
 }
 img.main-pic {
   height: 60vh;
-  width: auto;
+  width: 30vw;
   margin-top: 30px;
   margin-bottom: 30px;
 }
