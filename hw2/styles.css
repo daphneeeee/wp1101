@@ -44,7 +44,7 @@ button {
   transition: all 200ms ease;
 }
 .display-area {
-  width: 100%;
+  width: 100vw;
   justify-content: center;
 }
 .display-area-top {
@@ -58,13 +58,13 @@ button {
 }
 img.preview-pic {
   padding: 1%;
-  width: 100px;
-  height: auto;
-  margin: 20px 50px;
+  width: 10%;
+  height: 5%;
+  margin: 3% 5%;
 }
 img.main-pic {
-  height: 450px;
-  width: auto;
+  height: 60vh;
+  width: 30vw;
   margin-top: 30px;
   margin-bottom: 30px;
 }
@@ -76,8 +76,8 @@ img.preview-pic:hover {
   width: 100%;
 }
 .icon-left, .icon-right {
-  width: 50px;
-  height: 50px;
+  width: 5vw;
+  height: auto;
 }
 .icon-left:hover, .icon-right:hover {
   scale: 1.2;

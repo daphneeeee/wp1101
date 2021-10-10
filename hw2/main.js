@@ -45,7 +45,7 @@ function setSpecialEffect(newIndex) {
 }
 
 function selectAlbum(n) {
-  if (n > 3) {
+  if (n >= 3) {
     alert("Sorry, empty album!");
   } else {
     prevAlbum = document.getElementById(`album${album}`);
