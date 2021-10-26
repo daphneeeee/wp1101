@@ -7,6 +7,7 @@ export default function App() {
   const [todo, setTodo] = useState([]);
   const [left, setLeft] = useState(0);
   const [filter, setFilter] = useState("ALL");
+  const [complete, setComplete] = useState("");
 
   const handleSubmit = (e) => {
     if (e.key === "Enter" && e.target.value !== "") {
@@ -52,6 +53,16 @@ export default function App() {
     setLeft(n.length);
   }, [todo]);
 
+  useEffect(() => {
+    setComplete(todo.length - left);
+  }, [left, todo, complete]);
+
+  useEffect(() => {
+    if (todo.length === 0) {
+      setFilter("ALL");
+    }
+  }, [todo]);
+
   return (
     <>
       <div className="todo-app__root">
@@ -70,6 +81,7 @@ export default function App() {
         {todo.length !== 0 && (
           <Footer
             total={left}
+            done={complete}
             showAll={showAll}
             showActive={showActive}
             showCompleted={showCompleted}

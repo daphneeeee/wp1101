@@ -1,7 +1,7 @@
 import React from "react";
 import x from "./img/x.png";
 
-export default function Todo({ key, item, deleteTodo, completeTodo }) {
+export default function Todo({ item, deleteTodo, completeTodo }) {
   const handleComplete = () => {
     completeTodo(item.id);
   };
@@ -10,13 +10,13 @@ export default function Todo({ key, item, deleteTodo, completeTodo }) {
   };
 
   return (
-    <li className="todo-app__item" key={key}>
+    <li className="todo-app__item" key={item.id}>
       <div className="todo-app__checkbox">
         <input
           type="checkbox"
           id={item.id}
           checked={item.isCompleted}
-          onClick={handleComplete}
+          onChange={handleComplete}
         />
         <label htmlFor={item.id}></label>
       </div>

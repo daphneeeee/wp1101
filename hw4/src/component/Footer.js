@@ -2,6 +2,7 @@ import React from "react";
 
 export default function Footer({
   total,
+  done,
   showAll,
   showActive,
   showCompleted,
@@ -23,7 +24,9 @@ export default function Footer({
           </button>
         </ul>
         <div className="todo-app__clean">
-          <button onClick={clearComplete}>Clear completed</button>
+          {done !== 0 && (
+            <button onClick={clearComplete}>Clear completed</button>
+          )}
         </div>
       </footer>
     </>
