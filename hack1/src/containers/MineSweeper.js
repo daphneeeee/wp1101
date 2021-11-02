@@ -42,6 +42,8 @@ const MineSweeper = () => {
   }
   const backToHomeOnClick = () => {
     setStartGame(false);
+    setMineNum(10);
+    setBoardSize(8);
   };
 
   return (
