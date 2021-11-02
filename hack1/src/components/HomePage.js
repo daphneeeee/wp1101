@@ -27,11 +27,11 @@ const HomePage = ({
   }
 
   const handleMineNum = (e) => {
-    if (e.target.value * e.target.value > boardSize) {
+    mineNumOnChange(e.target.value);
+    if (e.target.value > boardSize * boardSize) {
       setError(true);
     } else {
       setError(false);
-      mineNumOnChange(e.target.value);
     }
   };
 
@@ -53,7 +53,7 @@ const HomePage = ({
         {showPanel && (
           <div className="controlWrapper">
             {error && (
-              <div className="error">
+              <div className="error" style={{ color: "#880000" }}>
                 ERROR: Mines number and board size are invalid!
               </div>
             )}
