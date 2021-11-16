@@ -14,8 +14,10 @@ function App() {
   };
 
   const handleGuess = async () => {
-    const res = await guess(number).catch(() => setStatus("Illegal input"));
-    if (res === "Equal") {
+    const res = await guess(number);
+    if (res.status === 406) {
+      setStatus(res.data.msg);
+    } else if (res === "Equal") {
       setHasWin(true);
     } else if (res) {
       setStatus(res);
