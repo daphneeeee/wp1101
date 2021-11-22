@@ -10,4 +10,15 @@ function getNumber() {
   return number;
 }
 
-export { genNumber, getNumber };
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
+function getServerGuessNum(min, max) {
+  const num = getRandomInt(min, max);
+  return num;
+}
+
+export { genNumber, getServerGuessNum, getNumber };

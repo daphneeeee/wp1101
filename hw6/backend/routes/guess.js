@@ -1,5 +1,5 @@
 import express from "express";
-import { genNumber, getNumber } from "../core/getNumber.js";
+import { genNumber, getServerGuessNum, getNumber } from "../core/getNumber.js";
 
 const router = express.Router();
 
@@ -19,6 +19,19 @@ router.get("/guess", (req, res) => {
     res.json({ msg: "Bigger" });
   } else {
     res.json({ msg: "Equal" });
+  }
+});
+
+router.get("/guess/server", (req, res) => {
+  const { userNum, serverNum } = req.query;
+  if (serverNum < userNum) {
+    const number = getServerGuessNum(serverNum, 100);
+    console.log("bigger", serverNum, userNum, number);
+    return res.json({ number });
+  } else {
+    const number = getServerGuessNum(1, serverNum);
+    console.log("smaller", serverNum, userNum, number);
+    return res.json({ number });
   }
 });
 
