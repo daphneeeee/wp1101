@@ -1,4 +1,3 @@
-import Router from "../router/index.js";
 import Score from "../models/ScoreCard.js";
 
 const saveScore = async (name, subject, score) => {

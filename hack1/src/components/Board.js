@@ -98,7 +98,6 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
       }
     }
   };
-  console.log(board);
 
   const revealCell = (x, y) => {
     {

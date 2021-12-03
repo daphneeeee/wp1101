@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './Containers/App';
-import reportWebVitals from './reportWebVitals';
-import { ScoreCardProvider } from './hooks/useScoreCard';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./Containers/App";
+import reportWebVitals from "./reportWebVitals";
+import { ScoreCardProvider } from "./hooks/useScoreCard";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -11,7 +11,7 @@ ReactDOM.render(
       <App />
     </ScoreCardProvider>
   </React.StrictMode>,
-  document.getElementById('root'),
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
