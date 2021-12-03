@@ -12,7 +12,6 @@ mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-// .then((res) => console.log("mongo db connection created."));
 
 const app = express();
 const server = http.createServer(app);
@@ -28,15 +27,10 @@ const broadcastMessage = (data, status) => {
   });
 };
 
-const initMessage = () => {
-  wss.clients.forEach((client) => {
-    initData();
-  });
-};
-
 db.once("open", () => {
   console.log("Mongo DB connected!");
   wss.on("connection", (ws) => {
+    initData(ws);
     ws.onmessage = async (byteString) => {
       const { data } = byteString;
       const [task, payload] = JSON.parse(data);
@@ -53,14 +47,6 @@ db.once("open", () => {
             type: "success",
             msg: "Message sent.",
           });
-          // sendData(["output", [payload]], ws);
-          // sendStatus(
-          //   {
-          //     type: "success",
-          //     msg: "Message sent.",
-          //   },
-          //   ws
-          // );
           break;
         }
         case "clear": {
@@ -69,8 +55,6 @@ db.once("open", () => {
               type: "info",
               msg: "Message cache cleared.",
             });
-            // sendData(["cleared"]);
-            // sendStatus({ type: "info", msg: "Message cache cleared." });
           });
           break;
         }

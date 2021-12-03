@@ -8,15 +8,14 @@ const sendStatus = (payload, ws) => {
   sendData(["status", payload], ws);
 };
 
-const initData = () => {
+const initData = (ws) => {
   Message.find()
     .sort({ created_at: -1 })
     .limit(100)
     .exec((err, res) => {
       if (err) throw err;
-      console.log(res);
       // initialize app with existing messages
-      sendData(["init", res]);
+      sendData(["init", res], ws);
     });
 };
 

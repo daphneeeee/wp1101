@@ -21,6 +21,7 @@ const useChat = () => {
     const [task, payload] = JSON.parse(data);
     switch (task) {
       case "init": {
+        console.log(payload);
         setMessages(() => payload);
         break;
       }
