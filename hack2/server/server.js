@@ -25,13 +25,14 @@ const dboptions = {
 };
 
 // TODO 1: connect to your mongodb here
-mongoose.connect(process.env.MONGO_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-// .then((res) => {
-//   if (process.env.MODE === "EXAM") dataInit();
-// });
+mongoose
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((res) => {
+    if (process.env.MODE === "EXAM") dataInit();
+  });
 
 app.use("/api", postRoute);
 

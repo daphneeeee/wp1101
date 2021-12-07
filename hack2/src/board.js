@@ -11,7 +11,7 @@ function Board(props) {
   useEffect(() => {
     const fetchData = async () => {
       const res = await instance.get("/allPosts");
-      const { message, data } = res.data;
+      const { data } = res.data;
       setPosts(data);
     };
     fetchData();
