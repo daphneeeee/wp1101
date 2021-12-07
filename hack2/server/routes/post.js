@@ -41,7 +41,7 @@ router.post("/newPost", async (req, res) => {
     await newPost.save();
     res.status(200).send({ message: "success" });
   } catch (error) {
-    res.status(403).send({ message: "error" });
+    res.status(403).send({ message: "error", post: null });
   }
 });
 
@@ -52,7 +52,7 @@ router.delete("/post", async (req, res) => {
     await Post.deleteOne({ postId: pid });
     res.status(200).send({ message: "success" });
   } catch (error) {
-    res.status(403).send({ message: "error" });
+    res.status(403).send({ message: "error", post: null });
   }
 });
 
