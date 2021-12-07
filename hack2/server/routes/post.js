@@ -8,6 +8,10 @@ const router = express.Router();
 router.get("/allPosts", async (_, res) => {
   try {
     const post = await Post.find({}).sort({ timestamp: -1 });
+    if (post.length === 0) {
+      res.status(403).send({ message: "error", data: null });
+      return;
+    }
     res.status(200).send({ message: "success", data: post });
   } catch (error) {
     res.status(403).send({ message: "error", data: null });
@@ -19,6 +23,10 @@ router.get("/postDetail", async (req, res) => {
   const { pid } = req.query;
   try {
     const post = await Post.findOne({ postId: pid });
+    if (post === null) {
+      res.status(403).send({ message: "error", post: null });
+      return;
+    }
     res.status(200).send({ message: "success", post: post });
   } catch (error) {
     res.status(403).send({ message: "error", post: null });
