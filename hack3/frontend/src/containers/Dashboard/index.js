@@ -87,7 +87,7 @@ export default function Dashboard() {
         } = subscriptionData;
         return {
           tasks: prev.tasks.filter((t) => t.id !== taskDeleted)
-        }
+        };
       },
     });
   }, [subscribeToMore]);
