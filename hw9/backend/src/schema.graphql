@@ -1,0 +1,40 @@
+type Query {
+  chatBox(chatBoxName: String!): ChatBox!
+}
+
+type Mutation {
+  createChatBox(name1: String!, name2: String!): ChatBox!
+  createMessage(from: String!, to: String!, message: String!): Message!
+  clearMessage(chatBoxName: String!): String!
+}
+
+type Subscription {
+  chatBox(chatBoxName: String!): MessageSubscriptionPayload!
+}
+
+type User {
+  id: ID!
+  name: String!
+}
+
+type Message {
+  id: ID!
+  sender: User!
+  body: String!
+}
+
+type ChatBox {
+  id: ID!
+  name: String!
+  messages: [Message!]
+}
+
+enum MutationType {
+  CREATE
+  DELETE
+}
+
+type MessageSubscriptionPayload {
+  mutation: MutationType!
+  data: Message
+}
