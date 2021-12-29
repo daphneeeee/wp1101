@@ -75,6 +75,13 @@ const ChatRoom = ({ me, displayStatus }) => {
         <ChatModal 
           visible={modalVisible}
           onCreate={ async ({ name }) => {
+            if (!name.trim()) {
+              displayStatus({
+                type: "error",
+                msg: "Please enter chatBox name.",
+              });
+              return;
+            }
             setFriend(name);
             await startChat({
               variables: {
@@ -106,7 +113,7 @@ const ChatRoom = ({ me, displayStatus }) => {
         enterButton="Send"
         placeholder="Enter message here..."
         onSearch={(msg) => {
-          if (!msg) {
+          if (!msg.trim()) {
             displayStatus({
               type: "error",
               msg: "Please enter message.",
