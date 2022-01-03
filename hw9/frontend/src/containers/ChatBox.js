@@ -11,7 +11,7 @@ const Messages = styled.div`
   overflow: auto;
 `
 
-const ChatBox = ({ me, friend, setDot, setNewMsgRoom, ...props }) => {
+const ChatBox = ({ me, friend, setNewMsgRoom, setCount, ...props }) => {
   const messageFooter = useRef(null);
   const chatBoxName = [me, friend].sort().join('_');
 
@@ -37,6 +37,7 @@ const ChatBox = ({ me, friend, setDot, setNewMsgRoom, ...props }) => {
         updateQuery: (prev, { subscriptionData }) => {
           if (!subscriptionData.data) return prev;
           else if (subscriptionData.data.chatBox.mutation === "DELETE") {
+            setCount(false);
             return {
               chatBox: {
                 name: prev.chatBox.name,
@@ -45,8 +46,8 @@ const ChatBox = ({ me, friend, setDot, setNewMsgRoom, ...props }) => {
             };
           }
           setNewMsgRoom(subscriptionData.data.chatBox.data.sender.name);
-          setDot(true);
           const newMessage = subscriptionData.data.chatBox.data;
+          setCount(true);
           return {
             chatBox: {
               name: prev.chatBox.name,
@@ -56,7 +57,7 @@ const ChatBox = ({ me, friend, setDot, setNewMsgRoom, ...props }) => {
         },
       });
     } catch (error) {}
-  }, [subscribeToMore, friend, me, chatBoxName, setNewMsgRoom, setDot]);
+  }, [subscribeToMore, friend, me, chatBoxName, setNewMsgRoom]);
 
   if (loading) {
     return <p>loading...</p>

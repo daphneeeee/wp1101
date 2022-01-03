@@ -25,8 +25,8 @@ const ChatRoom = ({ me, displayStatus }) => {
   const [modalVisible, setModalVisible] = useState(true);
   const [friend, setFriend] = useState("");
   const chatBoxName = [me, friend].sort().join("_");
-  const [dot, setDot] = useState(false);
   const [newMsgRoom, setNewMsgRoom] = useState("");
+  const [count, setCount] = useState(false);
   
   const [startChat] = useMutation(CREATE_CHATBOX_MUTATION);
   const [sendMessage] = useMutation(CREATE_MESSAGE_MUTATION);
@@ -54,7 +54,7 @@ const ChatRoom = ({ me, displayStatus }) => {
           tabBarStyle={{ height: "36px", marginTop: "10px" }}
           type="editable-card"
           activeKey={activeKey}
-          onChange={(key) => { setActiveKey(key); }}
+          onChange={(key) => { setActiveKey(key); setCount(false); }}
           onEdit={(targetKey, action) => {
             if (action === "add") addChatBox();
             else if (action === "remove") {
@@ -64,11 +64,12 @@ const ChatRoom = ({ me, displayStatus }) => {
         >
           {chatBoxes.map((friend) => (
             <Tabs.TabPane 
-              tab={friend === newMsgRoom ? <Badge dot={dot}>{friend}</Badge> : friend} 
-              closable={true} key={friend} 
+              tab={friend === newMsgRoom ? <Badge dot={count}>{friend}</Badge> : friend} 
+              closable={true} 
+              key={friend} 
               animated={true}
             >
-              <ChatBox me={me} friend={friend} setDot={setDot} setNewMsgRoom={setNewMsgRoom} key={friend} />
+              <ChatBox me={me} friend={friend} setNewMsgRoom={setNewMsgRoom} setCount={setCount} key={friend} />
             </Tabs.TabPane>
           ))}
         </Wrapper>
@@ -90,9 +91,10 @@ const ChatRoom = ({ me, displayStatus }) => {
               },
             });
             setActiveKey(() => {
-              const box = chatBoxes.find((c) => c === name);
+              const box = chatBoxes.find((box) => box === name);
               if (!box) {
-                createChatBox(name)
+                const newFriend = createChatBox(name);
+                return newFriend
               } else {
                 displayStatus({
                   type: "error",
@@ -109,7 +111,6 @@ const ChatRoom = ({ me, displayStatus }) => {
       <Input.Search 
         value={messageInput}
         onChange={(e) => setMessageInput(e.target.value)}
-        onClick={() => setDot(false)}
         enterButton="Send"
         placeholder="Enter message here..."
         onSearch={(msg) => {
